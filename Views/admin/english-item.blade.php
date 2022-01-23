@@ -149,7 +149,7 @@
                 @endif
 
                 <!--edit-->
-                    <a href="{!! URL::route('english.edit', [   'id' => $item->id,
+                    <a href="{!! URL::route('word_english.edit', [   'id' => $item->id,
                                                                 '_token' => csrf_token()
                                                             ])
                             !!}">
@@ -158,7 +158,7 @@
 
 
                     <!--copy-->
-                    <a href="{!! URL::route('english.copy',[    'cid' => $item->id,
+                    <a href="{!! URL::route('word_english.copy',[    'cid' => $item->id,
                                                                 '_token' => csrf_token(),
                                                             ])
                              !!}"
@@ -167,7 +167,7 @@
                     </a>&nbsp;
 
                     <!--delete-->
-                    <a href="{!! URL::route('english.delete',['id' => $item->id,
+                    <a href="{!! URL::route('word_english.delete',['id' => $item->id,
                                                                 '_token' => csrf_token(),
                                                                  ])
                              !!}"

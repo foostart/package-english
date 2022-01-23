@@ -59,5 +59,34 @@ return [
         'edit' => ['_superadmin', '_user-editor'],
         'add' => ['_superadmin', '_user-editor'],
         'delete' => ['_superadmin', '_user-editor'],
+    ],
+
+
+    /*
+    |-----------------------------------------------------------------------
+    | Resources
+    |-----------------------------------------------------------------------
+    | Name
+    | Line
+    | Word
+    | Link
+    |
+    */
+    'resources' => [
+//        [
+//            'name' => '',
+//            'line' => '',
+//            'word' => '',
+//            'link' => '',
+//            'model' => '',
+//        ],
+        [
+            'name' => 'dwyl',
+            'file' => 'word.txt',
+            'line' => '466550',
+            'word' => '466550',
+            'link' => 'https://github.com/dwyl/english-words',
+            'model' => 'WordResourceDwy',
+        ]
     ]
 ];

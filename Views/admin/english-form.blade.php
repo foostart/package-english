@@ -2,13 +2,13 @@
 | List of elements in english form
 |------------------------------------------------------------------------------->
 
-{!! Form::open(['route'=>['english.english', 'id' => @$item->id],  'files'=>true, 'method' => 'english'])  !!}
+{!! Form::open(['route'=>['word_english.english', 'id' => @$item->id],  'files'=>true, 'method' => 'english'])  !!}
 
 <!--BUTTONS-->
 <div class='btn-form'>
     <!-- DELETE BUTTON -->
     @if($item)
-        <a href="{!! URL::route('english.delete',['id' => @$item->id, '_token' => csrf_token()]) !!}"
+        <a href="{!! URL::route('word_english.delete',['id' => @$item->id, '_token' => csrf_token()]) !!}"
            class="btn btn-danger pull-right margin-left-5 delete">
             {!! trans($plang_admin.'.buttons.delete') !!}
         </a>

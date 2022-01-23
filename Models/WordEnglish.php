@@ -1,10 +1,10 @@
 <?php namespace Foostart\English\Models;
 
 use Foostart\Category\Library\Models\FooModel;
-use Illuminate\Database\Eloquent\Model;
+
 use Foostart\Comment\Models\Comment;
 
-class English extends FooModel
+class WordEnglish extends FooModel
 {
 
     /**
@@ -12,6 +12,8 @@ class English extends FooModel
      * @param array $attributes
      */
     public $user = NULL;
+    const VAL_TRUE = 1;
+    const VAL_FALSE = 0;
 
     public function __construct(array $attributes = array())
     {
@@ -26,91 +28,126 @@ class English extends FooModel
     {
 
         //table name
-        $this->table = 'english';
+        $this->table = 'word_english';
 
         //list of field in table
         $this->fillable = array_merge($this->fillable, [
-            'english_name',
-            'english_slug',
-            'english_overview',
-            'english_description',
-            'english_image',
-            'english_files',
-            //Relation
-            'category_id',
-            'slideshow_id',
+            'word',
+            'noun',
+            'verb',
+            'adjective',
+            'adverb',
+            'pronoun',
+            'preposition',
+            'conjunction',
+            'interjection',
+            'phonetic',
+            'phonetics',
+            'meanings',
         ]);
 
         //list of fields for inserting
         $this->fields = array_merge($this->fields, [
-            'english_name' => [
-                'name' => 'english_name',
+            'word' => [
+                'name' => 'word',
                 'type' => 'Text',
             ],
-            'english_slug' => [
-                'name' => 'english_slug',
-                'type' => 'Text',
+            'noun' => [
+                'name' => 'noun',
+                'type' => 'Int',
             ],
-            'english_overview' => [
-                'name' => 'english_overview',
-                'type' => 'Text',
+            'verb' => [
+                'name' => 'verb',
+                'type' => 'Int',
             ],
-            'english_description' => [
-                'name' => 'english_description',
-                'type' => 'Text',
+            'adjective' => [
+                'name' => 'adjective',
+                'type' => 'Int',
             ],
-            'english_image' => [
-                'name' => 'english_image',
-                'type' => 'Text',
+            'adverb' => [
+                'name' => 'adverb',
+                'type' => 'Int',
             ],
-            'english_files' => [
-                'name' => 'files',
+            'pronound' => [
+                'name' => 'pronound',
+                'type' => 'Int',
+            ],
+            'preposition' => [
+                'name' => 'preposition',
+                'type' => 'Int',
+            ],
+            'conjunction' => [
+                'name' => 'conjunction',
+                'type' => 'Int',
+            ],
+            'interjection' => [
+                'name' => 'interjection',
+                'type' => 'Int',
+            ],
+            'phonetic' => [
+                'name' => 'phonetic',
                 'type' => 'Json',
             ],
-            //Relation
-            'category_id' => [
-                'name' => 'category_id',
-                'type' => 'Int',
+            'phonetics' => [
+                'name' => 'phonetics',
+                'type' => 'Json',
             ],
-            'slideshow_id' => [
-                'name' => 'slideshow_id',
-                'type' => 'Int',
+            'meanings' => [
+                'name' => 'meanings',
+                'type' => 'Json',
             ],
         ]);
 
         //check valid fields for inserting
         $this->valid_insert_fields = array_merge($this->valid_insert_fields, [
-            'english_name',
-            'english_slug',
-            'english_overview',
-            'english_description',
-            'english_image',
-            'english_files',
-            //Relation
-            'category_id',
-            'slideshow_id',
+            'word',
+            'noun',
+            'verb',
+            'adjective',
+            'adverb',
+            'pronoun',
+            'preposition',
+            'conjunction',
+            'interjection',
+            'phonetic',
+            'phonetics',
+            'meanings',
         ]);
 
         //check valid fields for ordering
         $this->valid_ordering_fields = [
-            'english_name',
-            'updated_at',
+            'word',
+            'noun',
+            'verb',
+            'adjective',
+            'adverb',
+            'pronoun',
+            'preposition',
+            'conjunction',
+            'interjection',
+            'phonetic',
+            'phonetics',
+            'meanings',
             $this->field_status,
         ];
         //check valid fields for filter
         $this->valid_filter_fields = [
-            'keyword',
-            'status',
-            'category',
-            '_id',
-            'limit',
-            'english_id!',
-            'category_id',
-            'user_id',
+            'word',
+            'noun',
+            'verb',
+            'adjective',
+            'adverb',
+            'pronoun',
+            'preposition',
+            'conjunction',
+            'interjection',
+            'phonetic',
+            'phonetics',
+            'meanings',
         ];
 
         //primary key
-        $this->primaryKey = 'english_id';
+        $this->primaryKey = 'word_id';
 
     }
 
@@ -166,7 +203,9 @@ class English extends FooModel
         $elo = $this->createSelect($elo);
 
         //id
-        $elo = $elo->where($this->primaryKey, $params['id']);
+        if (!empty($params['id'])) {
+            $elo = $elo->where($this->primaryKey, $params['id']);
+        }
 
         //first item
         $item = $elo->first();

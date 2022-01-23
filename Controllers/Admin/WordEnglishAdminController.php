@@ -16,13 +16,15 @@ use URL, Route, Redirect;
 use Illuminate\Support\Facades\App;
 
 use Foostart\Category\Library\Controllers\FooController;
-use Foostart\English\Models\English;
+use Foostart\English\Models\WordEnglish;
 use Foostart\Category\Models\Category;
 use Foostart\Slideshow\Models\Slideshow;
 use Foostart\English\Validators\EnglishValidator;
+use Illuminate\Support\Facades\Http;
+use Foostart\English\Trait\WordResourceTrait;
 
 
-class EnglishAdminController extends FooController
+class WordEnglishAdminController extends FooController
 {
 
     public $obj_item = NULL;
@@ -31,6 +33,7 @@ class EnglishAdminController extends FooController
     public $categories = NULL;
     public $slideshow = NULL;
 
+    use WordResourceTrait;
 
     public function __construct(Request $request)
     {
@@ -38,7 +41,7 @@ class EnglishAdminController extends FooController
         parent::__construct();
 
         //models
-        $this->obj_item = new English(array('perPage' => 10));
+        $this->obj_item = new WordEnglish(array('perPage' => 10));
         $this->obj_category = new Category();
         $this->obj_slideshow = new Slideshow();
 
@@ -63,6 +66,7 @@ class EnglishAdminController extends FooController
                 'edit' => $this->package_name . '::admin.' . $this->package_base_name . '-edit',
                 'config' => $this->package_name . '::admin.' . $this->package_base_name . '-config',
                 'lang' => $this->package_name . '::admin.' . $this->package_base_name . '-lang',
+                'install' => $this->package_name . '::admin.' . $this->package_base_name . '-install',
             ]
         ];
 
@@ -108,7 +112,7 @@ class EnglishAdminController extends FooController
 
         } else if (empty($params['user_id']) || ($params['user_id'] != $user['user_id'])) {
 
-            return redirect()->route('english.list', ['user_id' => $user['user_id']]);
+            return redirect()->route('word_english.list', ['user_id' => $user['user_id']]);
 
         }
 
@@ -465,5 +469,57 @@ class EnglishAdminController extends FooController
         ));
 
         return view($this->page_views['admin']['edit'], $this->data_view);
+    }
+
+    public function updateInfo(Request $request) {
+
+        $words = English::all();
+
+        foreach ($words as $word) {
+            $urlDictionaryApi = 'https://api.dictionaryapi.dev/api/v2/entries/' . $word->word . '/';
+            $response = Http::get($urlDictionaryApi);
+
+            if ($response->ok()) {
+                $info = $response->json();
+                if (!empty($info)) {
+                    foreach ($info as $_info) {
+                        $meanings = !empty($info['meanings'])?json_encode($info['meanings']):'';
+                        $phonetics = !empty($info['meanings'])?json_encode($info['meanings']):'';
+                        $phonetic = !empty($info['phonetic'])?$info['phonetic']:'';
+
+                        $word->meanings = $meanings;
+
+                    }
+
+                }
+            }
+
+            var_dump($response->toArray());
+            die();
+        }
+    }
+
+    public function getPartOfSpeech($meaings) {
+        $partOfSpeechs = [];
+
+    }
+
+    /**
+     * Install and update dictionaries from multiple resources
+     * @param Request $request
+     */
+    public function install(Request $request) {
+        // display view
+        $this->data_view = array_merge($this->data_view, array(
+            'request' => $request,
+        ));
+
+        $action = $request->get('action', null);
+        switch ($action) {
+            case 'truncate':
+                $this->obj_item->truncate();
+                break;
+        }
+        return view($this->page_views['admin']['install'], $this->data_view);
     }
 }

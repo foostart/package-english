@@ -49,7 +49,7 @@
                     }
                     ?>
                     <td>
-                        <a href="{!! URL::route('english.lang', ['v' => base64_encode($group_backup), 'lang' => $lang]) !!}">
+                        <a href="{!! URL::route('word_english.lang', ['v' => base64_encode($group_backup), 'lang' => $lang]) !!}">
                             {!! basename($backup) !!}
                         </a>
                     </td>

@@ -3,7 +3,7 @@
 use Foostart\Category\Library\Validators\FooValidator;
 use Event;
 use \LaravelAcl\Library\Validators\AbstractValidator;
-use Foostart\English\Models\English;
+use Foostart\English\Models\WordEnglish;
 
 use Illuminate\Support\MessageBag as MessageBag;
 
@@ -25,7 +25,7 @@ class EnglishValidator extends FooValidator
         self::$configs = $this->loadConfigs();
 
         // model
-        $this->obj_english = new English();
+        $this->obj_english = new WordEnglish();
 
         // language
         $this->lang_front = 'english-front';

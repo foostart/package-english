@@ -36,75 +36,93 @@ Route::group(['middleware' => ['web']], function () {
         /**
          * list
          */
-        Route::get('admin/english', [
-            'as' => 'english.list',
-            'uses' => 'EnglishAdminController@index'
+        Route::get('admin/word_english', [
+            'as' => 'word_english.list',
+            'uses' => 'WordEnglishAdminController@index'
         ]);
 
         /**
          * edit-add
          */
-        Route::get('admin/english/edit', [
-            'as' => 'english.edit',
-            'uses' => 'EnglishAdminController@edit'
+        Route::get('admin/word_english/edit', [
+            'as' => 'word_english.edit',
+            'uses' => 'WordEnglishAdminController@edit'
         ]);
 
         /**
          * copy
          */
-        Route::get('admin/english/copy', [
-            'as' => 'english.copy',
-            'uses' => 'EnglishAdminController@copy'
+        Route::get('admin/word_english/copy', [
+            'as' => 'word_english.copy',
+            'uses' => 'WordEnglishAdminController@copy'
         ]);
 
         /**
          * english
          */
-        Route::post('admin/english/edit', [
-            'as' => 'english.english',
-            'uses' => 'EnglishAdminController@english'
+        Route::post('admin/word_english/edit', [
+            'as' => 'word_english.english',
+            'uses' => 'WordEnglishAdminController@english'
         ]);
 
         /**
          * delete
          */
-        Route::get('admin/english/delete', [
-            'as' => 'english.delete',
-            'uses' => 'EnglishAdminController@delete'
+        Route::get('admin/word_english/delete', [
+            'as' => 'word_english.delete',
+            'uses' => 'WordEnglishAdminController@delete'
         ]);
 
         /**
          * trash
          */
-        Route::get('admin/english/trash', [
-            'as' => 'english.trash',
-            'uses' => 'EnglishAdminController@trash'
+        Route::get('admin/word_english/trash', [
+            'as' => 'word_english.trash',
+            'uses' => 'WordEnglishAdminController@trash'
+        ]);
+
+        /**
+         * install
+         */
+        Route::get('admin/word_english/install', [
+            'as' => 'word_english.install',
+            'uses' => 'WordEnglishAdminController@install'
+        ]);
+
+        Route::post('admin/word_english/config', [
+            'as' => 'word_english.config',
+            'uses' => 'WordEnglishAdminController@config'
         ]);
 
         /**
          * configs
          */
-        Route::get('admin/english/config', [
-            'as' => 'english.config',
-            'uses' => 'EnglishAdminController@config'
+        Route::get('admin/word_english/config', [
+            'as' => 'word_english.config',
+            'uses' => 'WordEnglishAdminController@config'
         ]);
 
-        Route::post('admin/english/config', [
-            'as' => 'english.config',
-            'uses' => 'EnglishAdminController@config'
+        Route::post('admin/word_english/config', [
+            'as' => 'word_english.config',
+            'uses' => 'WordEnglishAdminController@config'
         ]);
 
         /**
          * language
          */
-        Route::get('admin/english/lang', [
-            'as' => 'english.lang',
-            'uses' => 'EnglishAdminController@lang'
+        Route::get('admin/word_english/lang', [
+            'as' => 'word_english.lang',
+            'uses' => 'WordEnglishAdminController@lang'
         ]);
 
-        Route::post('admin/english/lang', [
-            'as' => 'english.lang',
-            'uses' => 'EnglishAdminController@lang'
+        Route::post('admin/word_english/lang', [
+            'as' => 'word_english.lang',
+            'uses' => 'WordEnglishAdminController@lang'
+        ]);
+
+        Route::get('admin/word_english/update_info', [
+            'as' => 'word_english.update_info',
+            'uses' => 'WordEnglishAdminController@updateInfo'
         ]);
 
     });

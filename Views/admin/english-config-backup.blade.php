@@ -36,7 +36,7 @@
 
                     <!--NAME-->
                     <td>
-                        <a href="{!! URL::route('english.config', ['v' => base64_encode($backup)]) !!}">
+                        <a href="{!! URL::route('word_english.config', ['v' => base64_encode($backup)]) !!}">
                             {!! basename($backup) !!}
                         </a>
                     </td>

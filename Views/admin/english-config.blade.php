@@ -46,7 +46,7 @@
 
                     <!--BODY-->
                     <div class="panel-body">
-                        {!! Form::open(['route'=>['english.config'], 'method' => 'english'])  !!}
+                        {!! Form::open(['route'=>['word_english.config'], 'method' => 'english'])  !!}
 
                         <div class='btn-form'>
 

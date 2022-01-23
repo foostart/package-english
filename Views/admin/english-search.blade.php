@@ -6,11 +6,11 @@
     </div>
     <div class="panel-body">
 
-    {!! Form::open(['route' => 'english.list','method' => 'get']) !!}
+    {!! Form::open(['route' => 'word_english.list','method' => 'get']) !!}
 
     <!--BUTTONS-->
         <div class="form-group">
-            <a href="{!! URL::route('english.list', ['context' => @$params['context']]) !!}"
+            <a href="{!! URL::route('word_english.list', ['context' => @$params['context']]) !!}"
                class="btn btn-default search-reset">
                 {!! trans($plang_admin.'.buttons.reset') !!}
             </a>

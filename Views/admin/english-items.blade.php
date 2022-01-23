@@ -25,7 +25,7 @@
                     <div class='panel-info panel-description'>
                         {!! trans($plang_admin.'.descriptions.list') !!} <br>
                         @if($is_admin)
-                            <p>You are admin, <a href="{!! Url::route('english.list',['user_id' => $user_id]) !!}">click
+                            <p>You are admin, <a href="{!! Url::route('word_english.list',['user_id' => $user_id]) !!}">click
                                     here</a> to view your created rules
                         @endif
                     </div>
@@ -50,7 +50,7 @@
 
                     <!--BODY-->
                     <div class="panel-body">
-                        {!! Form::open(['route'=>['english.delete', 'id' => @$item->id], 'method' => 'get'])  !!}
+                        {!! Form::open(['route'=>['word_english.delete', 'id' => @$item->id], 'method' => 'get'])  !!}
 
                         @include('package-english::admin.english-item')
 
